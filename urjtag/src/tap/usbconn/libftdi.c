@@ -396,6 +396,7 @@ usbconn_ftdi_common_open (urj_usbconn_t *conn, urj_log_level_t ll)
 
  open_error:
     ftdi_deinit (fc);
+    free (fc);
     /* mark ftdi layer as not initialized */
     p->fc = NULL;
 
@@ -513,6 +514,7 @@ usbconn_ftdi_open (urj_usbconn_t *conn)
     {
         ftdi_usb_close (fc);
         ftdi_deinit (fc);
+        free (fc);
         /* mark ftdi layer as not initialized */
         p->fc = NULL;
     }
@@ -609,6 +611,7 @@ usbconn_ftdi_mpsse_open (urj_usbconn_t *conn)
     {
         ftdi_usb_close (fc);
         ftdi_deinit (fc);
+        free (fc);
         /* mark ftdi layer as not initialized */
         p->fc = NULL;
     }
@@ -627,6 +630,7 @@ usbconn_ftdi_close (urj_usbconn_t *conn)
     {
         ftdi_usb_close (p->fc);
         ftdi_deinit (p->fc);
+        free (p->fc);
         p->fc = NULL;
     }
 
