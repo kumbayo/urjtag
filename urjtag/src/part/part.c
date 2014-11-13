@@ -77,7 +77,7 @@ urj_part_free (urj_part_t *p)
         return;
 
     /* id */
-    free (p->id);
+    urj_tap_register_free (p->id);
 
     if (p->alias)
         free (p->alias);        /* djf */
