@@ -316,14 +316,10 @@ usbconn_ftd2xx_connect (urj_usbconn_cable_t *template,
 
     if (!p || !c || !p->send_buf || !p->recv_buf)
     {
-        if (p->send_buf)
-            free (p->send_buf);
-        if (p->recv_buf)
-            free (p->recv_buf);
-        if (p)
-            free (p);
-        if (c)
-            free (c);
+        free (p->send_buf);
+        free (p->recv_buf);
+        free (p);
+        free (c);
         urj_error_set (URJ_ERROR_OUT_OF_MEMORY,
                        "malloc(%zd)/malloc(%zd)/malloc(%s) failed",
                        sizeof (urj_usbconn_t), sizeof (ftd2xx_param_t),
@@ -579,12 +575,9 @@ usbconn_ftd2xx_free (urj_usbconn_t *conn)
 {
     ftd2xx_param_t *p = conn->params;
 
-    if (p->send_buf)
-        free (p->send_buf);
-    if (p->recv_buf)
-        free (p->recv_buf);
-    if (p->serial)
-        free (p->serial);
+    free (p->send_buf);
+    free (p->recv_buf);
+    free (p->serial);
 
     free (conn->params);
     free (conn);
